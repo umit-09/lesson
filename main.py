@@ -16,10 +16,8 @@ output_directory = './output/faces/'  # Replace with the actual path to the outp
 gray_output_directory = './output/gray/'  # Path to save gray images
 
 # Create the output directories if they don't exist
-if not os.path.exists(output_directory):
-    os.makedirs(output_directory)
-if not os.path.exists(gray_output_directory):
-    os.makedirs(gray_output_directory)
+os.makedirs(output_directory, exist_ok=True)
+os.makedirs(gray_output_directory, exist_ok=True)
 
 # Process each image in the directory
 for filename in os.listdir(directory):
