@@ -12,11 +12,14 @@ def detect_faces(image):
 
 # Directory containing the images
 directory = './images/'  # Replace with the actual path to the directory
+output_directory = './output/faces/'  # Replace with the actual path to the output directory
+gray_output_directory = './output/gray/'  # Path to save gray images
 
-# Create the output directory if it doesn't exist
-output_directory = './faces/'  # Replace with the actual path to the output directory
+# Create the output directories if they don't exist
 if not os.path.exists(output_directory):
     os.makedirs(output_directory)
+if not os.path.exists(gray_output_directory):
+    os.makedirs(gray_output_directory)
 
 # Process each image in the directory
 for filename in os.listdir(directory):
@@ -35,3 +38,9 @@ for filename in os.listdir(directory):
         result_filename = f"result_{filename}"
         result_path = os.path.join(output_directory, result_filename)
         cv2.imwrite(result_path, image)
+
+        # Save the gray-scale version of the image
+        gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        gray_result_filename = f"gray_{filename}"
+        gray_result_path = os.path.join(gray_output_directory, gray_result_filename)
+        cv2.imwrite(gray_result_path, gray_image)
