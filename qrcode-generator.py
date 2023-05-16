@@ -4,7 +4,7 @@ import qrcode
 from PIL import Image
 import os
 
-def generateQRCode(inputData):
+def generateQRCode(inputData, desktop_path):
     qr = qrcode.QRCode(
         version=1,
         box_size=10,
@@ -13,7 +13,7 @@ def generateQRCode(inputData):
     qr.make(fit=True)
     img = qr.make_image(fill='black', back_color='white')
 
-    qr_img_path = os.path.join(desktop_path, f"qrcode_{data}.png")
+    qr_img_path = os.path.join(desktop_path, f"qrcode_{inputData}.png")
     img.save(qr_img_path)
 
 # Create a VideoCapture object to access the default camera
@@ -33,20 +33,19 @@ while True:
     # Find QR codes in the frame
     qrcodes = pyzbar.decode(gray)
 
-    if qrcodes != []:
+    if qrcodes:
         print(qrcodes)
         for qrcode in qrcodes:
             # Extract the data from the QR code
             data = qrcode.data.decode("utf-8")
-            text = str(data)
-            print("QR Code detected: ", text)
-            generateQRCode(text)
+            print("QR Code detected:", data)
+            generateQRCode(data, desktop_path)
             print("QR Code image saved to desktop.")
 
-        # Display the video stream
+    # Display the video stream
     cv2.imshow('frame', frame)
 
-        # Exit the loop if 'q' key is pressed
+    # Exit the loop if 'q' key is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
