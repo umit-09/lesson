@@ -9,6 +9,9 @@ image_width = 16 * box_size
 image_height = 16 * box_size
 tile_count = 0
 current_tile = 0
+green = "\033[92m"
+red = "\033[91m"
+reset = "\033[0m"
 
 def save_image(image, tile_count):
     tileset_path = os.path.join(output_directory, f"unicode_page_{tile_count}.png")
@@ -52,7 +55,7 @@ for filename in glob.iglob(root_dir + '*.png', recursive=True):
             tile_count += 1
             current_tile = 0
 
-    print(f"\033[0;31mSet ID:\033[0m \033[0;32m{tile_count}\033[0m  \033[0;31mCurrent image:\033[0m \033[0;32m{filename.split('./item')[1]}\033[0m")
+    print(f"Set ID: {tile_count} \t Current image: [92m{filename.split('./item')[1][1:]}")
 
 # Save the final image if there are remaining tiles
 if current_tile > 0:
