@@ -52,7 +52,7 @@ for filename in glob.iglob(root_dir + '*.png', recursive=True):
             tile_count += 1
             current_tile = 0
 
-    print(f"\033[0;31mSet ID:\033[0m \033[0;32m{tile_count}\033[0m  \033[0;31mCurrent image:\033[0m \033[0;32m{filename.split('./item\\')}\033[0m")
+    print(f"\033[0;31mSet ID:\033[0m \033[0;32m{tile_count}\033[0m  \033[0;31mCurrent image:\033[0m \033[0;32m{filename.split('./item')[1]}\033[0m")
 
 # Save the final image if there are remaining tiles
 if current_tile > 0:
